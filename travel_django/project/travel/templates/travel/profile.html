@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+
+<div class="container mt-4">
+    <div class="main-body">
+
+
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="{{ profile.get_profile_avatar }}" alt="Admin"
+                                 class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4>{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
+                                <p class="text-secondary mb-1">Full Stack Developer</p>
+                                <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                {% if request.user == profile.user %}
+                                <a href="{% url 'edit_user' profile.user.pk %}"><button class="btn btn-primary">Изменить
+                                    Профиль</button></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ profile.user.first_name }} {{ profile.user.last_name }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ profile.user.email }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">username</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ profile.user.username }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Bio</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ profile.bio }}
+                            </div>
+                        </div>
+                        <hr>
+                        {% if request.user == profile.user %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info"
+                                   href="{% url 'edit' profile.pk %}">Изменить Профиль</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <h3>Статьи этого автора</h3>
+        <section class="tiles">
+            {% for article in articles %}
+            <article class="style1">
+									<span class="image">
+										<img src="{{ article.get_image }}" alt=""/>
+									</span>
+                <a href="{% url 'detail' article.pk %}">
+                    <h5>{{ article.title }}</h5>
+                </a>
+            </article>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+
+{% endblock main %}

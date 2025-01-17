@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block main %}
+<div id="main">
+    <div class="inner">
+        <header>
+            <h1>Узбекистан – одно из лучших мест для посещения в 2024 году<br/>
+                </h1>
+        </header>
+        <section class="tiles">
+            {% for article in articles %}
+            <article class="style1">
+									<span class="image">
+										<img src="{{ article.get_image }}" alt=""/>
+									</span>
+                <a href="{% url 'detail' article.pk %}">
+                    <h5>{{ article.title }}</h5>
+                </a>
+            </article>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+
+
+{% endblock main %}
+
+

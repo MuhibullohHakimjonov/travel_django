@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <h1>Удалить комментарий</h1>
+  <form method="post">
+    {% csrf_token %}
+    <p>Вы уверены, что хотите удалить комментарий "{{ comment.content }}"?</p>
+    <input type="submit" value="Подтвердить">
+  </form>
+  <a class="btn btn-primary" href="{% url 'detail' comment.article.pk %}">Отмена</a>
+{% endblock main %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="card p-4 col-8 mt-4">
+            <div class="card-body">
+                <h3 class="text-center">
+                    {{ title }}
+                </h3>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">
+                        {% if 'update' in request.path %}
+                        Изменить
+                        {% else %}
+                        Создать
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
